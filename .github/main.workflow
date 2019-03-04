@@ -1,6 +1,6 @@
 workflow "Build and Deploy" {
   on = "push"
-  resolves = ["List Public IP"]
+  resolves = ["HTTP client"]
 }
 
 # Build
@@ -93,3 +93,12 @@ action "List Public IP" {
   args = ["get services -o wide"]
   secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
 }
+
+action "HTTP client" {
+  uses = "swinton/httpie.action@8ab0a0e926d091e0444fcacd5eb679d2e2d4ab3d"
+  needs = ["List Public IP"]
+  env = {
+    woooo = "okay"
+  }
+}# Build
+# AWS
